@@ -50,20 +50,20 @@
                     acc_z = event.acceleration.z;
                 }
 
-                document.getElementById("start").onclick(() => {
+                document.getElementById("start").onclick = () => {
 
-                });
+                };
 
-                document.getElementById("stop").onclick(() => {
-                    
-                });
+                document.getElementById("stop").onclick = () => {
 
-                document.getElementById("download").onclick(() => {
+                };
+
+                document.getElementById("download").onclick = () => {
                     var link = document.createElement('a');
                     link.download = name + '.png';
                     link.href = document.getElementById('area2').toDataURL()
                     link.click();
-                });
+                };
 
                 window.requestAnimationFrame(loop);
             }
