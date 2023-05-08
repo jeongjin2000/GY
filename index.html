@@ -10,7 +10,11 @@
 
         <!-- <script src="index.js"></script> -->
         <script>
+            let data = "";
+
             window.onload = init;
+
+            let on = false;
 
             let latitude = 0;
             let longitude = 0;
@@ -51,17 +55,17 @@
                 }
 
                 document.getElementById("start").onclick = () => {
-
+                    on = true;
                 };
 
                 document.getElementById("stop").onclick = () => {
-
+                    on = false;
                 };
 
                 document.getElementById("download").onclick = () => {
                     var link = document.createElement('a');
-                    link.download = name + '.png';
-                    link.href = document.getElementById('area2').toDataURL()
+                    link.href = 'data:text/plain;charset=utf-8,' + encodeURIComponent(data);
+                    link.download = "result" + '.csv';
                     link.click();
                 };
 
@@ -69,17 +73,27 @@
             }
 
             function loop(timeStamp){
-                secondsPassed = (timeStamp - oldTimeStamp) / 1000;
-                oldTimeStamp = timeStamp;
-                fps = Math.round(1 / secondsPassed);
+                if (on) {
+                    oldTimeStamp = timeStamp;
 
-                // Perform the update operation
-                getGPS();
-                // console.log(window.Date.now(), latitude, longitude, tilt_x, tilt_y, tilt_z, acc_x, acc_y, acc_z);
-                // console.log(tilt_x, tilt_y, tilt_z, acc_x, acc_y, acc_z);
-                let resultText = document.getElementById("result");
-                resultText.innerHTML = "millisecond: " + window.Date.now() + "<br>" + "latitude: " + latitude + "<br>" + "longitude: " + longitude + "<br>" + "tilt_x: " + tilt_x + "<br>" + "tilt_y: " + tilt_y + "<br>" + "tilt_z: " + tilt_z + "<br>" + "acc_x: " + acc_x + "<br>" + "acc_y: " + acc_y + "<br>" + "acc_z: " + acc_z;
-
+                    // Perform the update operation
+                    getGPS();
+                    // console.log(window.Date.now(), latitude, longitude, tilt_x, tilt_y, tilt_z, acc_x, acc_y, acc_z);
+                    // console.log(tilt_x, tilt_y, tilt_z, acc_x, acc_y, acc_z);
+                    let resultText = document.getElementById("result");
+                    let options = { year: "numeric",
+                        month: "numeric",
+                        day: "numeric",
+                        hour: "numeric",
+                        minute: "numeric",
+                        second: "numeric",
+                        hour12: false,
+                        timeZone: 'Asia/Seoul'};
+                    options.fractionalSecondDigits = 3;
+                    resultText.innerHTML = "time: " + new Intl.DateTimeFormat('ko-KR', options).format(window.Date.now()) + "<br>" + "latitude: " + latitude + "<br>" + "longitude: " + longitude + "<br>" + "tilt_x: " + tilt_x + "<br>" + "tilt_y: " + tilt_y + "<br>" + "tilt_z: " + tilt_z + "<br>" + "acc_x: " + acc_x + "<br>" + "acc_y: " + acc_y + "<br>" + "acc_z: " + acc_z;
+                    data += "\n" + new Intl.DateTimeFormat('ko-KR', options).format(window.Date.now()) + "," + latitude + "," + longitude + "," + tilt_x + "," + tilt_y + "," + tilt_z + "," + acc_x + "," + acc_y + "," + acc_z;
+                }
+                
                 window.requestAnimationFrame(loop);
             }
 
