@@ -63,7 +63,7 @@
                 // console.log(window.Date.now(), latitude, longitude, tilt_x, tilt_y, tilt_z, acc_x, acc_y, acc_z);
                 // console.log(tilt_x, tilt_y, tilt_z, acc_x, acc_y, acc_z);
                 let resultText = document.getElementById("result");
-                resultText.innerHTML = window.Date.now() + "<br>" + latitude + "<br>" + longitude + "<br>" + tilt_x + "<br>" + tilt_y + "<br>" + tilt_z + "<br>" + acc_x + "<br>" + acc_y + "<br>" + acc_z;
+                resultText.innerHTML = "millisecond: " + window.Date.now() + "<br>" + "latitude: " + latitude + "<br>" + "longitude: " + longitude + "<br>" + "tilt_x: " + tilt_x + "<br>" + "tilt_y: " + tilt_y + "<br>" + "tilt_z: " + tilt_z + "<br>" + "acc_x: " + acc_x + "<br>" + "acc_y: " + acc_y + "<br>" + "acc_z: " + acc_z;
 
                 window.requestAnimationFrame(loop);
             }
