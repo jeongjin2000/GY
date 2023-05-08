@@ -50,6 +50,21 @@
                     acc_z = event.acceleration.z;
                 }
 
+                document.getElementById("start").onclick(() => {
+
+                });
+
+                document.getElementById("stop").onclick(() => {
+                    
+                });
+
+                document.getElementById("download").onclick(() => {
+                    var link = document.createElement('a');
+                    link.download = name + '.png';
+                    link.href = document.getElementById('area2').toDataURL()
+                    link.click();
+                });
+
                 window.requestAnimationFrame(loop);
             }
 
@@ -81,13 +96,6 @@
                 longitude = position.coords.longitude;
                 // console.log(latitude, longitude)
             }
-
-            var download = function(name){
-                var link = document.createElement('a');
-                link.download = name + '.png';
-                link.href = document.getElementById('area2').toDataURL()
-                link.click();
-            }
         </script>
 
         <!-- CSS -->
@@ -97,5 +105,8 @@
     </head>
     <body>
         <div id="result"></div>
+        <div id="start">start</div>
+        <div id="stop">stop</div>
+        <div id="download">download</div>
     </body>
 </html>
